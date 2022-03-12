@@ -22,4 +22,8 @@ def vsp_check(str):
 t = int(sys.stdin.readline())
 for _ in range(t):
     ps = sys.stdin.readline()
-    print(vsp_check(ps))
+    result = vsp_check(ps)
+    print(result)
+
+
+# 반례 )(),(()
