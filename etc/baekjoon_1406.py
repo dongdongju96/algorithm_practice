@@ -1,48 +1,57 @@
 import sys
 
-def L(input_list):
-    cursor_location = input_list.index('cursor')
-    if cursor_location!=0:
-        input_list.remove('cursor')
-        input_list.insert(cursor_location-1,'cursor')
+def L(cursor):
+    if cursor > 1:
+        cursor = cursor - 1        
     else:
-        pass
+        return cursor
+
+    return cursor
+
+def D(cursor,input_text):
+    if cursor < len(input_text)+1:
+        cursor = cursor + 1
+    else:
+        return cursor
+
+    return cursor
+
+def B(cursor,input_text):
+    if cursor > 1:
+        del input_text[cursor-2]
+        cursor = cursor - 1
+    else:
+        return cursor, input_text
+
+    return cursor, input_text
+
+def P(cursor, input_text, text):
+    input_text.insert(cursor-1, text)
+    cursor = cursor + 1
     
+    return cursor, input_text
 
-def D(input_list):
-    cursor_location = input_list.index('cursor')
-    if cursor_location!=len(input_list)-1:
-        input_list.remove('cursor')
-        input_list.insert(cursor_location+1,'cursor')
-    else:
-        pass
-
-def B(input_list):
-    cursor_location = input_list.index('cursor')
-    if cursor_location!=0:
-        del input_list[cursor_location-1]
-    else:
-        pass
-
-def P(input_list, text):
-    cursor_location = input_list.index('cursor')
-    input_list.insert(cursor_location-1, text)
 
 input_text = sys.stdin.readline()
 input_text = list(input_text)
 input_text.pop()
-input_text.append('cursor')
+
+# 커서는 맨 뒤에 위치
+cursor = len(input_text)+1
+
 m = int(sys.stdin.readline())
+
 for _ in range(m):
     command = sys.stdin.readline()
     command_list = command.split()
     if command_list[0]=='P':
-        P(input_text, command_list[1])
+        cursor, input_text = P(cursor,input_text, command_list[1])
     elif command_list[0]=='L':
-        L(input_text)
+        cursor = L(cursor)
     elif command_list[0]=='D':
-        D(input_text)
+        cursor = D(cursor, input_text)
     else:
-        B(input_text)
-input_text.remove('cursor')
+        cursor, input_text = B(cursor,input_text)
+
+# 최종 출력
 print(''.join(input_text))
