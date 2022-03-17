@@ -1,26 +1,28 @@
 import sys
 
-n = int(input())
+n = int(sys.stdin.readline())
 
 deque = []
 
 for _ in range(n):
     command_list = sys.stdin.readline().split()
+    print(command_list)
+    print(deque)
     if command_list[0]=='push_front':
-        deque = list(command_list[1]) + deque
+        deque = [command_list[1]] + deque
     
     elif command_list[0]=='push_back':
         deque.append(command_list[1])
     
     elif command_list[0]=='pop_front':
-        if deque:
+        if len(deque)!=0:
             print(deque[0])
             del deque[0]
         else:
             print(-1)
 
     elif command_list[0]=='pop_back':
-        if deque:
+        if len(deque)!=0:
             print(deque[-1])
             del deque[-1]
         else:
@@ -30,19 +32,19 @@ for _ in range(n):
         print(len(deque))
 
     elif command_list[0]=='empty':
-        if deque:
+        if len(deque)!=0:
             print(0)
         else:
             print(1)
 
     elif command_list[0]=='front':
-        if deque:
+        if len(deque)!=0:
             print(deque[0])
         else:
             print(-1)
     
     elif command_list[0]=='back':
-        if deque:
+        if len(deque)!=0:
             print(deque[-1])
         else:
             print(-1)
