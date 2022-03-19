@@ -10,6 +10,9 @@ str = input()
 
 for spell in str:
     if spell=='<':
+        dec.append(spell)
+        while stack:
+            result += stack.pop()
         state = False
     
     elif spell=='>':
@@ -17,7 +20,7 @@ for spell in str:
         while dec:
             result += dec.popleft()
         state = True
-        continue
+        
 
     elif spell==' ':
         while stack:
@@ -25,13 +28,13 @@ for spell in str:
         while dec:
             result += dec.popleft()
         result += ' '
-        continue
-    
-    if state:
-        stack.append(spell)
-    else:
-        dec.append(spell)
         
+    else:
+        if state:
+            stack.append(spell)
+        else:
+            dec.append(spell)
+
 while stack:
     result += stack.pop()
     
