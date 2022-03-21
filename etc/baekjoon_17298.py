@@ -1,19 +1,18 @@
+import sys
+input = sys.stdin.readline
+
 n = int(input())
-nge = list(map(int,input().split()))
+input_list = list(map(int,input().split()))
+
+stack = []
+result = [-1] * n
 
 for i in range(n):
-
-    if i==n-1:
-        print(-1)
-        break
-    else:
-        standard = nge[i]
-        stack = []
-        for j in nge[i+1:]:
-            if standard < j:
-                stack.append(j)
-
-        if stack:
-            print(stack[0], end=' ')
+    while stack:
+        if input_list[i] > input_list[stack[-1]]:
+            result[stack.pop()] = input_list[i]            
         else:
-            print(-1, end=' ')
+            break
+    stack.append(i)
+
+print(*result)
