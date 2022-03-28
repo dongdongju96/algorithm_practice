@@ -1,9 +1,10 @@
 s = input()
-li = [-1] * 28
-index = 0
+li = [-1] * 26
+stack = []
 
-for alphabet in s:
-    li[ord(alphabet)-ord('a')] = index
-    index += 1
-
+for index, alphabet in enumerate(s):
+    if alphabet not in stack:
+        stack.append(alphabet)
+        li[ord(alphabet)-ord('a')] = index
+    
 print(*li)
