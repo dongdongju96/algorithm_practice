@@ -1,8 +1,8 @@
-str = input()
+str = input().rstrip('\n')
+print(str)
 stack = [0]*4
 
 for s in str:
-    print(s)
     if ord(s)>=ord('a') and ord(s)<=ord('z'):
         stack[0] = stack[0] + 1
     elif ord(s)>=ord('A') and ord(s)<=ord('Z'):
